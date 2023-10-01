@@ -1,6 +1,5 @@
 :root {
   --main-bg-color: #141e46;
-  --main-font-color: white;
   --light-white: #fff5e0;
   --light-red: #ff6969;
   --container-width: 768px;
@@ -13,7 +12,7 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #FFE5E5;
+  background-color: var(--light-white);
 }
 .container {
   max-width: var(--container-width);
@@ -32,7 +31,7 @@ body {
   font-family: var(--font-heading-stack);
   text-transform: uppercase;
   text-align: center;
-  color: var(--light-red);
+  color: var(--light-white);
   font-size: 3rem;
 }
 .hangman-board {
@@ -41,7 +40,7 @@ body {
   margin: 0 auto;
 }
 .hangman-word {
-  color: var(--main-font-color);
+  color: var(--light-white);
   font-size: 2.4rem;
   text-align: center;
   margin: 1.5rem 0;
@@ -55,7 +54,6 @@ body {
 }
 .hangman-letters {
   list-style-type: none;
-  color: var(--main-font-color);
   max-width: 580px;
   margin: 0 auto;
   display: flex;
@@ -68,7 +66,7 @@ body {
   border-radius: 4px;
   margin: 1rem 1px 0 1px;
   background: var(--light-white);
-  color: var(--light-white);
+  color: #000;
   border: 3px solid var(--main-bg-color);
   font-size: 1.2rem;
 }
@@ -85,13 +83,17 @@ body {
   font-size: 1.4rem;
   padding: 0.8rem 1.2rem;
   background: var(--light-red);
-  border: 0;
-  font-weight: bold;
   color: var(--light-white);
+  border: 0;
+  border-radius: 8px;
+  font-weight: bold;
 }
 .button:focus {
   outline: 0;
-  box-shadow: 0 0 10px rgb(255, 170, 0);
+  box-shadow: 0 0 10px var(--light-red);
+}
+.button:hover {
+  background-color: rgb(255, 105, 105, 0.9)
 }
 
 /* instructions screen */
