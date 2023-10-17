@@ -1,6 +1,7 @@
 import Home from './home.js';
-import { sound } from '../data/sound.js';
 import End from './end.js';
+import Board from './board.js';
+import { sound } from '../data/sound.js';
 
 const Game = (()=> {
   const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -15,8 +16,9 @@ const Game = (()=> {
     guessingWord = Array(chosenWord.length).fill('_');
     guesses = [];
     lives = 7;
-    render();
+    initPage();
     listeners();
+    Board.init();
   }
 
   const listeners = ()=> {
@@ -44,6 +46,7 @@ const Game = (()=> {
     }
     else {
       lives--;
+      Board.setLives(lives);
     }
     render();
     isGameOver();
@@ -54,6 +57,7 @@ const Game = (()=> {
 
   const isGameOver = ()=> {
     if(hasWon()) {
+      console.log("endTimeout")
       sound.win.play();
       End.setState({
         chosenWord,
@@ -61,11 +65,14 @@ const Game = (()=> {
       })
     }
     if(hasLost()) {
+      console.log("sss")
       sound.lose.play();
-      End.setState({
-        chosenWord,
-        result: 'lost'
-      })
+      setTimeout(()=> {
+        End.setState({
+          chosenWord,
+          result: 'lost'
+        })
+      },1000)
     }
   }
 
@@ -78,6 +85,12 @@ const Game = (()=> {
   }
 
   const render = ()=> {
+    document.querySelector('.hangman-lives').innerHTML = lives;
+    document.querySelector('.hangman-word').innerHTML = guessingWord.join('');
+    document.querySelector('.hangman-letters').innerHTML = createLetters();
+  }
+
+  const initPage = ()=> {
     let markup = `
       <p class='hangman-stats'> 
         Lives:
@@ -93,7 +106,6 @@ const Game = (()=> {
       <button class='button hangman-trigger'>Main Menu</button>
       `;
     hangmanElement.innerHTML = markup;
-
   }
   const createLetters = ()=> {
     let markup = '';
