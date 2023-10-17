@@ -57,7 +57,6 @@ const Game = (()=> {
 
   const isGameOver = ()=> {
     if(hasWon()) {
-      console.log("endTimeout")
       sound.win.play();
       End.setState({
         chosenWord,
@@ -65,7 +64,6 @@ const Game = (()=> {
       })
     }
     if(hasLost()) {
-      console.log("sss")
       sound.lose.play();
       setTimeout(()=> {
         End.setState({
